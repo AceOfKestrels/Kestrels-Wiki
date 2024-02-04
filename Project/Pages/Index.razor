@@ -1,0 +1,27 @@
+﻿@page "/"
+@inject RepoService Repo
+@inject IJSRuntime JS
+
+<div style="background-color: #d0d0d0;">
+	<md-block src="test.md"></md-block>
+</div>
+
+
+@code {
+	private string exampleJson = @"{
+	""message"": ""this is an example message"",
+	""an_array"": [{
+			""blogAwesome"": true,
+			""reason"": ""best content""
+		}
+	]
+}";
+
+	protected override async Task OnAfterRenderAsync(bool firstRender)
+	{
+		if (firstRender)
+		{
+			await JS.InvokeVoidAsync("highlightAll");
+		}
+	}
+}
